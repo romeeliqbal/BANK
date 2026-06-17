@@ -1,4 +1,27 @@
 // =========================
+// THEME TOGGLE
+// =========================
+
+function toggleTheme() {
+  const body = document.body;
+  body.classList.toggle("light-mode");
+  
+  // Save theme preference
+  const currentTheme = body.classList.contains("light-mode") ? "light" : "dark";
+  localStorage.setItem("bankTheme", currentTheme);
+  
+  notify(`Switched to ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} Mode`);
+}
+
+// Load theme on page load
+function loadTheme() {
+  const savedTheme = localStorage.getItem("bankTheme");
+  if (savedTheme === "light") {
+    document.body.classList.add("light-mode");
+  }
+}
+
+// =========================
 // BANK SAAS LOGIC
 // =========================
 
@@ -72,6 +95,8 @@ function deposit() {
   account.rewardPoints += Math.floor(amount / 100);
 
   addTransaction("Deposit", amount);
+  
+  document.getElementById("amount").value = "";
 }
 
 // Withdraw
@@ -83,6 +108,8 @@ function withdraw() {
   account.balance -= amount;
 
   addTransaction("Withdraw", amount);
+  
+  document.getElementById("amount").value = "";
 }
 
 // Transfer
@@ -100,6 +127,8 @@ function transfer() {
   account.transferredToday += amount;
 
   addTransaction("Transfer", amount);
+  
+  document.getElementById("amount").value = "";
 }
 
 // Loan
@@ -239,6 +268,22 @@ Balance:${t.balance}
   link.click();
 }
 
+// Clear History
+function clearHistory() {
+  if (confirm("Clear all transaction history?")) {
+    account.transactions = [];
+    saveData();
+    renderTransactions();
+  }
+}
+
+// Logout
+function logout() {
+  if (confirm("Are you sure you want to logout?")) {
+    alert("Logged out successfully!");
+  }
+}
+
 // Reset
 function resetAccount() {
   if (confirm("Reset Everything?")) {
@@ -262,8 +307,7 @@ function notify(msg) {
 }
 
 // Initialize
+loadTheme();
 loadData();
-
 updateDashboard();
-
 renderTransactions();
