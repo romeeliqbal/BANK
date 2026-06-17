@@ -9,6 +9,15 @@
   </head>
   <body>
     <div class="container">
+      <!-- Theme Toggle -->
+      <div class="theme-toggle-container">
+        <div class="theme-toggle" onclick="toggleTheme()">
+          <span class="theme-toggle-label">🌙 Dark</span>
+          <div class="theme-toggle-switch"></div>
+          <span class="theme-toggle-label">☀️ Light</span>
+        </div>
+      </div>
+
       <!-- Header -->
       <header class="header">
         <div>
@@ -84,8 +93,6 @@
         <button onclick="downloadStatement()">Download Statement</button>
 
         <button onclick="clearHistory()">Clear History</button>
-
-        <button onclick="toggleTheme()">Dark Mode</button>
 
         <button onclick="logout()">Logout</button>
       </section>
