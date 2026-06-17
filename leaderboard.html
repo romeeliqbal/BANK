@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bank Leaderboard - Rankings</title>
+
+    <link rel="stylesheet" href="leaderboard.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Theme Toggle -->
+      <div class="theme-toggle-container">
+        <div class="theme-toggle" onclick="toggleLeaderboardTheme()">
+          <span class="theme-toggle-label">🌙 Dark</span>
+          <div class="theme-toggle-switch"></div>
+          <span class="theme-toggle-label">☀️ Light</span>
+        </div>
+      </div>
+
+      <!-- Header -->
+      <header class="leaderboard-header">
+        <div class="header-content">
+          <h1>🏆 Bank Leaderboard</h1>
+          <p>Top Richest Members</p>
+        </div>
+        <a href="index.html" class="back-button">← Back to Dashboard</a>
+      </header>
+
+      <!-- Filter Section -->
+      <section class="filter-section">
+        <button
+          class="filter-btn active"
+          onclick="filterLeaderboard('balance')"
+        >
+          💰 Total Balance
+        </button>
+        <button class="filter-btn" onclick="filterLeaderboard('savings')">
+          🏦 Savings
+        </button>
+        <button class="filter-btn" onclick="filterLeaderboard('rewardPoints')">
+          🎁 Reward Points
+        </button>
+        <button class="filter-btn" onclick="generateRandomPlayers()">
+          🎲 Add Players
+        </button>
+      </section>
+
+      <!-- Leaderboard Stats -->
+      <section class="stats-section">
+        <div class="stat-card">
+          <h3>Total Players</h3>
+          <p id="totalPlayers">1</p>
+        </div>
+        <div class="stat-card">
+          <h3>Your Rank</h3>
+          <p id="yourRank">-</p>
+        </div>
+        <div class="stat-card">
+          <h3>Total Wealth</h3>
+          <p id="totalWealth">$0</p>
+        </div>
+      </section>
+
+      <!-- Leaderboard Table -->
+      <section class="leaderboard-section">
+        <table class="leaderboard-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Player</th>
+              <th>Balance</th>
+              <th>Savings</th>
+              <th>Loan</th>
+              <th>Reward Points</th>
+              <th>Net Worth</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboardBody">
+            <!-- Leaderboard rows will be inserted here -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Your Position -->
+      <section class="your-position-section">
+        <h2>📍 Your Position</h2>
+        <div class="your-position-card" id="yourPositionCard">
+          <!-- Your position will be shown here -->
+        </div>
+      </section>
+
+      <!-- Refresh Button -->
+      <section class="refresh-section">
+        <button class="refresh-btn" onclick="refreshLeaderboard()">
+          🔄 Refresh Leaderboard
+        </button>
+      </section>
+    </div>
+
+    <script src="leaderboard.js"></script>
+  </body>
+</html>
