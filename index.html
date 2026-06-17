@@ -3,25 +3,106 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Bank SaaS Dashboard</title>
+
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <input type="number" id="amount" placeholder="Enter Amount" />
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div>
+          <h1>🏦 Bank SaaS</h1>
+          <p>Welcome Back!</p>
+        </div>
 
-    <button onclick="deposit()">Deposit</button>
+        <div class="profile">
+          <img src="https://i.pravatar.cc/100" alt="" />
+          <div>
+            <h3>John Doe</h3>
+            <small>Premium Account</small>
+          </div>
+        </div>
+      </header>
 
-    <button onclick="withdraw()">Withdraw</button>
+      <!-- Dashboard Cards -->
+      <section class="cards">
+        <div class="card">
+          <h3>Total Balance</h3>
+          <h1 id="balance">$0</h1>
+        </div>
 
-    <button onclick="transfer()">Transfer</button>
+        <div class="card">
+          <h3>Savings</h3>
+          <h1 id="saving">$5000</h1>
+        </div>
 
-    <button onclick="clearHistory()">Clear History</button>
+        <div class="card">
+          <h3>Loan</h3>
+          <h1 id="loan">$0</h1>
+        </div>
 
-    <button onclick="toggleTheme()">Dark Mode</button>
+        <div class="card">
+          <h3>Reward Points</h3>
+          <h1 id="points">0</h1>
+        </div>
+      </section>
 
-    <button onclick="logout()">Logout</button>
+      <!-- Amount Input -->
+      <section class="actions">
+        <input type="number" id="amount" placeholder="Enter Amount" />
 
-    <h2>Balance: <span id="balance">$0</span></h2>
+        <button class="deposit" onclick="deposit()">Deposit</button>
 
-    <div id="history"></div>
+        <button class="withdraw" onclick="withdraw()">Withdraw</button>
+
+        <button class="transfer" onclick="transfer()">Transfer</button>
+
+        <button class="loan" onclick="requestLoan()">Loan</button>
+
+        <button onclick="payLoan()">Pay Loan</button>
+
+        <button onclick="addSavings()">Savings</button>
+
+        <button onclick="redeemRewards()">Rewards</button>
+      </section>
+
+      <!-- Search -->
+
+      <div class="search">
+        <input
+          type="text"
+          id="search"
+          placeholder="Search Transaction..."
+          onkeyup="searchTransactions()"
+        />
+      </div>
+
+      <!-- Extra Buttons -->
+
+      <section class="actions">
+        <button onclick="downloadStatement()">Download Statement</button>
+
+        <button onclick="clearHistory()">Clear History</button>
+
+        <button onclick="toggleTheme()">Dark Mode</button>
+
+        <button onclick="logout()">Logout</button>
+      </section>
+
+      <!-- Transaction History -->
+
+      <section class="history">
+        <h2>Recent Transactions</h2>
+
+        <div id="history"></div>
+      </section>
+    </div>
+
+    <!-- Notification -->
+
+    <div id="notification" class="notification"></div>
+
+    <script src="script.js"></script>
   </body>
 </html>
