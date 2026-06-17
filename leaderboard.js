@@ -42,7 +42,6 @@ function loadLeaderboardData() {
   if (saved) {
     leaderboardData = JSON.parse(saved);
   } else {
-    // Initialize with current user
     leaderboardData = [
       {
         name: currentUser.name,
@@ -56,7 +55,6 @@ function loadLeaderboardData() {
     saveLeaderboardData();
   }
 
-  // Update current user in leaderboard
   const userIndex = leaderboardData.findIndex((p) => p.isCurrentUser);
   if (userIndex !== -1) {
     leaderboardData[userIndex] = {
@@ -160,7 +158,6 @@ function displayLeaderboard() {
 function filterLeaderboard(filter) {
   currentFilter = filter;
 
-  // Update active button
   document.querySelectorAll(".filter-btn").forEach((btn) => {
     btn.classList.remove("active");
   });
@@ -174,20 +171,16 @@ function updateStats() {
   const sortedData = getSortedLeaderboard();
   const userIndex = sortedData.findIndex((p) => p.isCurrentUser);
 
-  // Total players
   document.getElementById("totalPlayers").innerText = leaderboardData.length;
 
-  // Your rank
   document.getElementById("yourRank").innerText =
     userIndex !== -1
       ? `#${userIndex + 1} of ${leaderboardData.length}`
       : "Unranked";
 
-  // Total wealth
   const totalWealth = leaderboardData.reduce((sum, p) => sum + calculateNetWorth(p), 0);
   document.getElementById("totalWealth").innerText = "$" + totalWealth.toLocaleString();
 
-  // Your position card
   displayYourPosition(userIndex);
 }
 
@@ -334,7 +327,6 @@ function notify(msg) {
   }, 3000);
 }
 
-// Add CSS animation dynamically
 const style = document.createElement("style");
 style.textContent = `
   @keyframes slideInRight {
@@ -350,12 +342,10 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Initialize on page load
 window.addEventListener("load", () => {
   loadLeaderboardTheme();
   initializeLeaderboard();
 
-  // Refresh data every 5 seconds
   setInterval(() => {
     loadUserData();
     loadLeaderboardData();
@@ -364,7 +354,6 @@ window.addEventListener("load", () => {
   }, 5000);
 });
 
-// Update when user returns from dashboard
 window.addEventListener("focus", () => {
   refreshLeaderboard();
 });
