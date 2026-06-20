@@ -155,13 +155,15 @@ function displayLeaderboard() {
 }
 
 // Filter leaderboard
-function filterLeaderboard(filter) {
+function filterLeaderboard(filter, event) {
   currentFilter = filter;
 
   document.querySelectorAll(".filter-btn").forEach((btn) => {
     btn.classList.remove("active");
   });
-  event.target.classList.add("active");
+  if (event && event.target) {
+    event.target.classList.add("active");
+  }
 
   displayLeaderboard();
 }
@@ -248,15 +250,17 @@ function generateRandomPlayers() {
   ];
 
   const existingNames = leaderboardData.map((p) => p.name);
-  const availableNames = names.filter((n) => !existingNames.includes(n));
+  let availableNames = names.filter((n) => !existingNames.includes(n));
 
-  if (availableNames.length === 0) {
-    alert("❌ All demo players already added!");
-    return;
+  let randomName;
+  if (availableNames.length > 0) {
+    randomName =
+      availableNames[Math.floor(Math.random() * availableNames.length)];
+  } else {
+    // All demo names are taken — keep generating unique players anyway
+    const base = names[Math.floor(Math.random() * names.length)];
+    randomName = `${base} ${Math.floor(Math.random() * 1000)}`;
   }
-
-  const randomName =
-    availableNames[Math.floor(Math.random() * availableNames.length)];
 
   const newPlayer = {
     name: randomName,
@@ -293,7 +297,7 @@ function toggleLeaderboardTheme() {
   body.style.transition = "background 0.5s ease, color 0.5s ease";
 
   const currentTheme = body.classList.contains("light-mode") ? "light" : "dark";
-  localStorage.setItem("leaderboardTheme", currentTheme);
+  localStorage.setItem("appTheme", currentTheme);
 
   notify(
     `✨ Switched to ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} Mode`,
@@ -302,7 +306,7 @@ function toggleLeaderboardTheme() {
 
 // Load theme on page load
 function loadLeaderboardTheme() {
-  const savedTheme = localStorage.getItem("leaderboardTheme");
+  const savedTheme = localStorage.getItem("appTheme");
   if (savedTheme === "light") {
     document.body.classList.add("light-mode");
   }
